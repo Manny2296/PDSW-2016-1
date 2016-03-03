@@ -52,6 +52,13 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         
     }
 
+    /**
+     * Clases de Equivalencia
+     * Que el paciente p sea null.
+     * Que el paciente p exista.
+     */
+    
+    
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
         pacientes.put(new Tupla<>(p.getId(),p.getTipo_id()), p);

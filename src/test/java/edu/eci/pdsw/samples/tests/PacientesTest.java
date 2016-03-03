@@ -16,6 +16,12 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
+import java.util.Date;
+import javax.validation.constraints.AssertFalse;
+import javax.xml.crypto.Data;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -33,9 +39,27 @@ public class PacientesTest {
     public void setUp() {
     }
     
+    /**
+     * 
+     */
     @Test
-    public void registroPacienteTest(){
+    public void registroPacienteTest() throws ExcepcionServiciosPacientes{
+        Date fecha=new Date(2016, 03, 03);
+        Paciente paciente=new Paciente(1, "Medico", "Jose Suarez", (java.sql.Date) fecha);
+        ServiciosPacientesStub isp = null;
         
+        boolean Band=false;
+        try{
+            isp.registrarNuevoPaciente(paciente);
+            Band=true;
+        }
+        catch(ExcepcionServiciosPacientes e){
+            Band=false;
+        }
+        assertTrue(Band);
+        
+        
+       
     }
     
     
