@@ -55,7 +55,15 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
         pacientes.put(new Tupla<>(p.getId(),p.getTipo_id()), p);
+        
     }
+    
+    /*
+    Clases de Equivalencia:
+    CE1: EL id del Paciente no existe , deberia lanzar excepcion.
+    CE2: el id del Paciente existe, funcion OK.
+    
+    */
 
     @Override
     public void agregarConsultaAPaciente(int idPaciente, String tipoid, Consulta c) throws ExcepcionServiciosPacientes {

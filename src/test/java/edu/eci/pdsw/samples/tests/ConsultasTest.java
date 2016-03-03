@@ -16,6 +16,12 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.entities.Consulta;
+import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientes;
+import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
+import java.sql.Date;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -25,7 +31,11 @@ import static org.junit.Assert.*;
  * @author hcadavid
  */
 public class ConsultasTest {
+    String fecha = "03/03/2016";
+    Paciente pa  = new Paciente(001,"CC","Manuel Felipe", Date.valueOf(fecha));
+    ServiciosPacientesStub sps;
     
+  
     public ConsultasTest() {
     }
     
@@ -34,8 +44,10 @@ public class ConsultasTest {
     }
     
     @Test
-    public void registroPacienteTest(){
+    public void registroPacienteTest() throws ExcepcionServiciosPacientes{
         
+        sps.agregarConsultaAPaciente(pa.getId(),"CC", new Consulta(new Date(2016,04,04),"Consulta  para medico"));
+        assertEquals("EL paciente existe y puede registrarse en una consulta. ",pa.getId(), 001);
     }
     
     
