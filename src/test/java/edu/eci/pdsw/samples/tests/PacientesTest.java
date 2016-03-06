@@ -44,18 +44,16 @@ public class PacientesTest {
      */
     @Test
     public void registroPacienteTest() throws ExcepcionServiciosPacientes{
-        Date fecha=new Date(2016, 03, 03);
-        Paciente paciente=new Paciente(1, "Medico", "Jose Suarez", (java.sql.Date) fecha);
-        ServiciosPacientesStub isp = null;
-        
-        boolean Band=false;
+        boolean Band = false;
         try{
-            isp.registrarNuevoPaciente(paciente);
-            Band=true;
+        Paciente paciente=new Paciente(123, "CC", "Sergio Aponte", java.sql.Date.valueOf("2016-03-03"));      
+        ServiciosPacientesStub isp =new ServiciosPacientesStub();
+        isp.registrarNuevoPaciente(paciente);
+        Band=true;
         }
         catch(ExcepcionServiciosPacientes e){
-            Band=false;
-        }
+            e.getStackTrace();
+        }     
         assertTrue(Band);
         
         

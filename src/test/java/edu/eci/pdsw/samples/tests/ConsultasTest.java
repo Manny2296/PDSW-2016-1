@@ -31,9 +31,8 @@ import static org.junit.Assert.*;
  * @author hcadavid
  */
 public class ConsultasTest {
-    String fecha = "03/03/2016";
-    Paciente pa  = new Paciente(001,"CC","Manuel Felipe", Date.valueOf(fecha));
-    ServiciosPacientesStub sps;
+    Paciente pa  = new Paciente(001,"CC","Manuel Felipe", java.sql.Date.valueOf("2016-03-03"));
+    ServiciosPacientesStub sps=new ServiciosPacientesStub();
     
   
     public ConsultasTest() {
@@ -44,10 +43,17 @@ public class ConsultasTest {
     }
     
     @Test
-    public void registroPacienteTest() throws ExcepcionServiciosPacientes{
-        
+    public void registroConsultasPacientesTest() throws ExcepcionServiciosPacientes{
+        boolean bald=false;
+        try{
         sps.agregarConsultaAPaciente(pa.getId(),"CC", new Consulta(new Date(2016,04,04),"Consulta  para medico"));
-        assertEquals("EL paciente existe y puede registrarse en una consulta. ",pa.getId(), 001);
+        bald=true;
+        }
+        catch(ExcepcionServiciosPacientes e){
+            e.printStackTrace();
+            
+        }
+        assertFalse(bald);
     }
     
     
