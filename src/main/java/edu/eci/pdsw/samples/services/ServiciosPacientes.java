@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.sql.Date;
 
 /**
  *
@@ -27,7 +28,48 @@ public abstract class ServiciosPacientes {
     
     
     private static ServiciosPacientes instance=new ServiciosPacientesStub();
-    
+    Paciente tmp  ;
+    int id; String tipo_id; String nombre; Date consultas;
+
+    public Paciente getTmp() {
+        return tmp;
+    }
+
+    public void setTmp(Paciente tmp) {
+        this.tmp = tmp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(Date consultas) {
+        this.consultas = consultas;
+    }
     
     protected ServiciosPacientes(){        
 

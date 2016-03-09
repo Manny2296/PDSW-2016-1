@@ -33,9 +33,51 @@ import java.util.logging.Logger;
 public class ServiciosPacientesStub extends ServiciosPacientes{
 
     private final Map<Tupla<Integer,String>,Paciente> pacientes;
+    
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    @Override
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public Date getConsultas() {
+        return consultas;
+    }
+
+    @Override
+    public void setConsultas(Date consultas) {
+        this.consultas = consultas;
+    }
+    
     public ServiciosPacientesStub() {
         this.pacientes = new LinkedHashMap<>();
+      
         cargarDatosEstaticos(pacientes);
     }
     
@@ -52,6 +94,17 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         
     }
 
+    @Override
+    public Paciente getTmp() {
+        tmp = new Paciente(id, tipo_id, nombre, consultas);
+        return tmp;
+    }
+
+    @Override
+    public void setTmp(Paciente tmp) {
+        this.tmp = tmp;
+    }
+
     /**
      * Clases de Equivalencia
      * Que el paciente p sea null.
@@ -61,8 +114,9 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
+     
         pacientes.put(new Tupla<>(p.getId(),p.getTipo_id()), p);
-        
+        System.out.println("Paciente agregado satisfactoriamente");
     }
     
     /*

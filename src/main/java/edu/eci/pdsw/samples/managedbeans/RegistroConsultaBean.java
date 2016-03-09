@@ -18,18 +18,30 @@ package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
+import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author hcadavid
  */
-@ManagedBean
+@ManagedBean (name="RegConBean")
 @SessionScoped
 public class RegistroConsultaBean implements Serializable{
     
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+
+    public ServiciosPacientes getSp() {
+        return sp;
+    }
+
+    public void setSp(ServiciosPacientes sp) {
+        this.sp = sp;
+    }
+    
     
     
 }
