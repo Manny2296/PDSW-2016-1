@@ -31,29 +31,52 @@ import static org.junit.Assert.*;
  * @author hcadavid
  */
 public class ConsultasTest {
-    Paciente pa  = new Paciente(001,"CC","Manuel Felipe", java.sql.Date.valueOf("2016-03-03"));
-    ServiciosPacientesStub sps=new ServiciosPacientesStub();
     
-  
-    public ConsultasTest() {
+    
+   /**
+   * pre:El paciente debe de existir.
+   * pos:Se obtiene al pacientep.
+   * objetivo:Consultar a un paciente.
+     * @throws ExcepcionServiciosPacientes
+   */
+    public ConsultasTest() throws ExcepcionServiciosPacientes {
+    try{    
+    Paciente pa= new Paciente(001,"CC","Manuel Felipe", java.sql.Date.valueOf("2016-03-03"));
+    ServiciosPacientesStub sps=new ServiciosPacientesStub();
+    sps.registrarNuevoPaciente(pa);
+    Paciente pacienteobtenido=sps.consultarPaciente(pa.getId(), pa.getTipo_id());
+    assertEquals(pa,pacienteobtenido);
+    }catch(ExcepcionServiciosPacientes e){
+        e.printStackTrace();}
     }
     
     @Before
     public void setUp() {
     }
     
+    
+    
+    /**
+     * pre:El id del paciente existe.
+     * pos:Se agrega una consulta al paciente.
+     * objetivo:Agregar una consulta al paciente.
+     * @throws ExcepcionServiciosPacientes 
+     */   
     @Test
     public void registroConsultasPacientesTest() throws ExcepcionServiciosPacientes{
         boolean bald=false;
         try{
+        Paciente pa  = new Paciente(001,"CC","Manuel Felipe", java.sql.Date.valueOf("2016-03-03"));
+        ServiciosPacientesStub sps=new ServiciosPacientesStub();
+        sps.registrarNuevoPaciente(pa);
         sps.agregarConsultaAPaciente(pa.getId(),"CC", new Consulta(new Date(2016,04,04),"Consulta  para medico"));
         bald=true;
-        }
+                }
         catch(ExcepcionServiciosPacientes e){
             e.printStackTrace();
             
         }
-        assertFalse(bald);
+        assertTrue(bald);
     }
     
     

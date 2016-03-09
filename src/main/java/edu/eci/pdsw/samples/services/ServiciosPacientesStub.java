@@ -107,8 +107,8 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     /**
      * Clases de Equivalencia
-     * Que el paciente p sea null.
-     * Que el paciente p exista.
+     * clase de equivalencia1: Que el paciente p sea null,en caso de null lanzar excepcion.
+     * clase de equivalencia2: Que el paciente p exista,efectuado.
      */
     
     

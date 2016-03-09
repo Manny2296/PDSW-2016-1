@@ -40,7 +40,10 @@ public class PacientesTest {
     }
     
     /**
-     * 
+     * pre:El paciente existe.
+     * pos:el paciente queda registrado en serviciosPacientesStub
+     * objetivo:Registrar a un paciente.
+     * @throws ExcepcionServiciosPacientes
      */
     @Test
     public void registroPacienteTest() throws ExcepcionServiciosPacientes{
@@ -55,9 +58,7 @@ public class PacientesTest {
             e.getStackTrace();
         }     
         assertTrue(Band);
-        
-        
-       
+              
     }
     
     
