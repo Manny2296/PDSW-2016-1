@@ -33,6 +33,17 @@ public abstract class ServiciosPacientes {
     Paciente tmp  ;
     int id; String tipo_id; String nombre; Date fechanacimiento;
     String consultacad;
+    private Consulta Pacientetmpdeconsulta;
+
+    public Consulta getPacientetmpdeconsulta() {
+        return Pacientetmpdeconsulta;
+    }
+
+    public void setPacientetmpdeconsulta(Consulta Pacientetmpdeconsulta) {
+        this.Pacientetmpdeconsulta = Pacientetmpdeconsulta;
+    }
+    
+    
 
     public String getConsultacad() {
         
@@ -120,5 +131,5 @@ public abstract class ServiciosPacientes {
      * @throws Excepcionconsultaapacienteinexistente si se presenta algún error de persistencia o si el paciente no existe.
      */
     public abstract void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c) throws ExcepcionServiciosPacientes;
-    
-}
+
+    }

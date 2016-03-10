@@ -5,7 +5,33 @@
     <h:head></h:head>
 
     <h:body>
-        
+        <p:growl id="messages" showDetail="true">
+            <p:panel id="pnl_addpaciente" header="Agregar una consulta" style="width: 1200px;">
+                <p:panelGrid columns="2" >
+                    
+                    <h:outputLabel id= "hour_date" for="hour_date" value= "Hora y fecha de la consulta" />
+                    <p:inputText value="#{RegistroConsultaBean.sp.id}"></p:inputText>
+                    
+                    <h:outputLabel id= "descripcion" for="descripcion" value= "Descripcion consulta"/>
+                    <p:inputText value="#{RegistroConsultaBean.sp.consultas}"></p:inputText>
+                    
+                    
+                    <p:dataTable id="dtb_pacientes" var="Consulta" value ="#{RegistroConsultaBean.sp.consultas }"  >
+                              <p:column headerText="Fecha y hora">
+                                <h:outputText value="#{paciente.id}"/>
+                             </p:column>
+                
+                              <p:column headerText="Descripcion">
+                                <h:outputText value="#{paciente.tipo_id}"/>
+                               </p:column>
+                    
+                    </p:dataTable>
+                </p:panelGrid>
+                
+                
+                
+            </p:panel>
+        </p:growl>
     </h:body>
 
 </html>

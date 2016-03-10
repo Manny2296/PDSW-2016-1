@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -36,7 +37,9 @@ import javax.faces.context.FacesContext;
 public class RegistroConsultaBean implements Serializable{
     
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
+    
 
+    
     public ServiciosPacientes getSp() {
         return sp;
     }
@@ -44,6 +47,8 @@ public class RegistroConsultaBean implements Serializable{
     public void setSp(ServiciosPacientes sp) {
         this.sp = sp;
     }
+    
+    
     
     
     
