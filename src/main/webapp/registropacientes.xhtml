@@ -1,11 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html>
-<html xmlns="http://www.w3c.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head></h:head>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
     <h:body>
-        
+        <h:form id = "frm_paciente">
+            <p:growl id="messages" showDetail="true">
+                <p:panel header="Agregar Paciente" style="width: 400px;"> 
+                    <p:panelGrid columns="2">
+                        <h:outputLabel for="id_pa" value= "Identificacion Paciente"/>
+                        <p:inputText value="#{RegConBean.sp.id}"></p:inputText>
+                        <h:outputLabel for="tipo_id" value= "Tipo de Identificacion"/>
+                        <p:inputText value="#{RegConBean.sp.tipo_id}"></p:inputText>
+                        <h:outputLabel for="nombre" value= "Nombre"/>
+                        <p:inputText value="#{RegConBean.sp.nombre}"></p:inputText>
+                        <h:outputLabel for="dateconsultas" value= "Consultas"/>
+                        <p:inputText value="#{RegConBean.sp.consultas}"></p:inputText>
+                         <f:facet name="footer">
+                             <h:commandButton value="Agregar Paciente" action="#{RegConBean.sp.registrarNuevoPaciente(RegConBean.sp.tmp)}"/>
+                    </f:facet>
+                </p:panelGrid>
+                        
+                    </p:panelGrid>
+                </p:panel>
+            </p:growl>
+        </h:form>
     </h:body>
-
 </html>
