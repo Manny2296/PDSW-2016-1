@@ -4,6 +4,8 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"      
       xmlns:h="http://java.sun.com/jsf/html"
@@ -16,24 +18,59 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+
         <h:form id = "frm_paciente">
+  <script type="text/javascript">
+
+        </script>
             <p:growl id="messages" showDetail="true">
-                <p:panel header="Agregar Paciente" style="width: 400px;"> 
-                    <p:panelGrid columns="2">
-                        <h:outputLabel for="id_pa" value= "Identificacion Paciente"/>
-                        <p:inputText value="#{RegConBean.sp.id}"></p:inputText>
-                        <h:outputLabel for="tipo_id" value= "Tipo de Identificacion"/>
-                        <p:inputText value="#{RegConBean.sp.tipo_id}"></p:inputText>
-                        <h:outputLabel for="nombre" value= "Nombre"/>
-                        <p:inputText value="#{RegConBean.sp.nombre}"></p:inputText>
-                        <h:outputLabel for="dateconsultas" value= "Consultas"/>
-                        <p:inputText value="#{RegConBean.sp.consultas}"></p:inputText>
+                <p:panel id="pnl_addpaciente" header="Agregar Paciente" style="width: 600px;"> 
+                    <p:panelGrid columns="2" >
+                        <h:outputLabel id= "id_pa" for="id_pa" value= "Identificacion Paciente"/>
+                        <p:inputText value="#{RegistroConsultaBean.sp.id}"></p:inputText>
+                        <h:outputLabel id="tipo_id" for="tipo_id" value= "Tipo de Identificacion"/>
+                        <p:inputText value="#{RegistroConsultaBean.sp.tipo_id}"></p:inputText>
+                        <h:outputLabel id="nombre" for="nombre" value= "Nombre"/>
+                        <p:inputText value="#{RegistroConsultaBean.sp.nombre}"></p:inputText>
+                        <h:outputLabel id="dateconsultas" for="dateconsultas" value= "Fecha Nacimiento"/>
+                        <p:inputText value="#{RegistroConsultaBean.sp.consultacad}"></p:inputText>
                          <f:facet name="footer">
-                             <h:commandButton value="Agregar Paciente" action="#{RegConBean.sp.registrarNuevoPaciente(RegConBean.sp.tmp)}"/>
+                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
+                             
                     </f:facet>
                 </p:panelGrid>
-                        
-                    </p:panelGrid>
+               
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}"  >
+                   <f:facet name="header">
+                    
+                </f:facet>
+                
+                <p:column>
+                    <p:rowToggler/>   
+                </p:column>
+                        <p:rowExpansion>
+                            <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"/>
+                        </p:rowExpansion>       
+                
+                <p:column headerText="Id">
+                    <h:outputText value="#{paciente.id}"/>
+                </p:column>
+                
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{paciente.tipo_id}"/>
+                </p:column>
+                
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{paciente.nombre}"/>
+                </p:column>
+                         <p:column headerText="Fecha Nacimiento">
+                             <h:outputText value="#{paciente.fechaNacimiento}"/>
+                </p:column>
+
+              
+                
+             
+            </p:dataTable>
                 </p:panel>
             </p:growl>
         </h:form>

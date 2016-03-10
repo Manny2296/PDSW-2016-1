@@ -19,6 +19,8 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  *
@@ -29,8 +31,17 @@ public abstract class ServiciosPacientes {
     
     private static ServiciosPacientes instance=new ServiciosPacientesStub();
     Paciente tmp  ;
-    int id; String tipo_id; String nombre; Date consultas;
+    int id; String tipo_id; String nombre; Date fechanacimiento;
+    String consultacad;
 
+    public String getConsultacad() {
+        
+        return consultacad;
+    }
+
+    public void setConsultacad(String consultacad) {
+        this.consultacad = consultacad;
+    }
     public Paciente getTmp() {
         return tmp;
     }
@@ -64,11 +75,14 @@ public abstract class ServiciosPacientes {
     }
 
     public Date getConsultas() {
-        return consultas;
+         
+        return fechanacimiento;
     }
+    
+    
 
     public void setConsultas(Date consultas) {
-        this.consultas = consultas;
+        this.fechanacimiento = consultas;
     }
     
     protected ServiciosPacientes(){        
@@ -78,6 +92,7 @@ public abstract class ServiciosPacientes {
     public static ServiciosPacientes getInstance() throws RuntimeException{        
         return instance;
     }
+    public abstract List<Paciente> listPaciente();
 
     /**
      * Consultar un paciente dado su identificador.

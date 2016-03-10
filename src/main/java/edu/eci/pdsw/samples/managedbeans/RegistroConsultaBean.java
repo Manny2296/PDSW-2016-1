@@ -24,12 +24,15 @@ import javax.faces.application.FacesMessage;
 
 import javax.faces.context.FacesContext;
 
+
 /**
  *
  * @author hcadavid
  */
-@ManagedBean (name="RegConBean")
+
+@ManagedBean (name="RegistroConsultaBean")
 @SessionScoped
+
 public class RegistroConsultaBean implements Serializable{
     
     ServiciosPacientes sp=ServiciosPacientes.getInstance();

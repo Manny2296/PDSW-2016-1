@@ -19,8 +19,10 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -32,18 +34,35 @@ import java.util.logging.Logger;
  */
 public class ServiciosPacientesStub extends ServiciosPacientes{
 
-    private final Map<Tupla<Integer,String>,Paciente> pacientes;
-    
+    public final Map<Tupla<Integer,String>,Paciente> pacientes;
+
 
     @Override
     public int getId() {
         return id;
     }
 
+ 
+
     @Override
     public void setId(int id) {
         this.id = id;
     }
+    @Override
+    public List<Paciente> listPaciente(){
+        List<Paciente> list = new ArrayList<>(pacientes.values());
+        try {
+            registrarNuevoPaciente(new Paciente(123, "CC", "Juan Perez", java.sql.Date.valueOf("2000-01-01")));
+            registrarNuevoPaciente(new Paciente(321, "CC", "Maria Rodriguez", java.sql.Date.valueOf("2000-01-01")));
+            registrarNuevoPaciente(new Paciente(875, "CC", "Pedro Martinez", java.sql.Date.valueOf("1956-05-01")));
+            
+            
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+   
 
     @Override
     public String getTipo_id() {
@@ -54,6 +73,7 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     public void setTipo_id(String tipo_id) {
         this.tipo_id = tipo_id;
     }
+    
 
     @Override
     public String getNombre() {
@@ -65,21 +85,13 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         this.nombre = nombre;
     }
 
-    @Override
-    public Date getConsultas() {
-        return consultas;
-    }
 
-    @Override
-    public void setConsultas(Date consultas) {
-        this.consultas = consultas;
-    }
-    
     public ServiciosPacientesStub() {
         this.pacientes = new LinkedHashMap<>();
       
         cargarDatosEstaticos(pacientes);
     }
+     
     
     
     @Override
@@ -96,7 +108,12 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     @Override
     public Paciente getTmp() {
-        tmp = new Paciente(id, tipo_id, nombre, consultas);
+        fechanacimiento = Date.valueOf(consultacad);
+        tmp = new Paciente(id, tipo_id, nombre, fechanacimiento);
+         setId(0);
+         setNombre("");
+         setTipo_id("");
+         setConsultacad("");
         return tmp;
     }
 
@@ -114,10 +131,13 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
-     
+      
         pacientes.put(new Tupla<>(p.getId(),p.getTipo_id()), p);
-        System.out.println("Paciente agregado satisfactoriamente");
+        
     }
+    
+    
+    
     
     /*
     Clases de Equivalencia:
