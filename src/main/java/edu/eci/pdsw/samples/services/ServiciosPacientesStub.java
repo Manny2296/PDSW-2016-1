@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 public class ServiciosPacientesStub extends ServiciosPacientes{
 
     public final Map<Tupla<Integer,String>,Paciente> pacientes;
-
+     
 
     @Override
     public int getId() {
@@ -53,7 +53,6 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         List<Paciente> list = new ArrayList<>(pacientes.values());
         try {
             registrarNuevoPaciente(new Paciente(123, "CC", "Juan Perez", java.sql.Date.valueOf("2000-01-01")));
-            agregarConsultaAPaciente(123, "CC", new Consulta(new Date(2000,02,02),"consulta medico personal"));
             registrarNuevoPaciente(new Paciente(321, "CC", "Maria Rodriguez", java.sql.Date.valueOf("2000-01-01")));
             registrarNuevoPaciente(new Paciente(875, "CC", "Pedro Martinez", java.sql.Date.valueOf("1956-05-01")));
             
@@ -106,11 +105,11 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         }
         
     }
-  
+
     @Override
     public Paciente getTmp() {
-        fechanacimiento = Date.valueOf(consultacad);
-        tmp = new Paciente(id, tipo_id, nombre, fechanacimiento);
+        fecha_actual = Date.valueOf(consultacad);
+        tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
          setId(0);
          setNombre("");
          setTipo_id("");

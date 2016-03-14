@@ -17,22 +17,14 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.entities.Consulta;
-import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
-import static java.lang.Math.log;
+import java.sql.Date;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIData;
 
 import javax.faces.context.FacesContext;
-import org.apache.log4j.Level;
-import static org.apache.log4j.LogMF.log;
-import static org.apache.log4j.LogSF.log;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 
 
 /**
@@ -44,21 +36,9 @@ import org.primefaces.event.UnselectEvent;
 @SessionScoped
 
 public class RegistroConsultaBean implements Serializable{
-
-    
-    private Paciente selectedPaciente;
-
     
     ServiciosPacientes sp=ServiciosPacientes.getInstance();
     
-    
-    public Paciente getSelectedPaciente() {
-        return selectedPaciente;
-    }
-
-    public void setSelectedPaciente(Paciente selectedPaciente) {
-        this.selectedPaciente = selectedPaciente;
-    }
 
     public ServiciosPacientes getSp() {
         return sp;
@@ -67,8 +47,6 @@ public class RegistroConsultaBean implements Serializable{
     public void setSp(ServiciosPacientes sp) {
         this.sp = sp;
     }
-    
-  
     
     
     

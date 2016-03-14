@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:head></h:head>
 
     <h:body>
-        <p:growl id="messages" showDetail="true" severity="algo" >
-            <p:panel id="pnl_seeaddconsulta" header="Agregar una consulta" style="width: 600px;height: 600px;" >
+        <p:growl id="messages" showDetail="true">
+            <p:panel id="pnl_addpaciente" header="Agregar una consulta" style="width: 1200px;">
+                <p:panelGrid columns="2" >
+                         
+                    <h:outputLabel id= "id_selecicon" for="id_client" value= "identificacion del cliente:" />
+                    <p:inputText value="#{RegistroConsultaBean.sp.seleccion.id}"></p:inputText>
+                    
+                    <h:outputLabel id= "name" for="name" value= "Nombre:"/>
+                    <p:inputText value="#{RegistroConsultaBean.sp.seleccion.nombre}"></p:inputText>
+                    <h:outputLabel id= "descripcion" for="desc" value= "Descripcion:"/>
+                    <p:inputText value="Construya la logica desde aca, es solo replicar lo que yo hize para crear un paciente"></p:inputText>
+                    
+        
+              
+                    <p:dataTable id="dtb_pacientes" var="Consulta" value ="#{RegistroConsultaBean.sp.fechanacimiento }"  >
+                              <p:column headerText="Fecha y hora">
+                                <h:outputText value="#{paciente.id}"/>
+                             </p:column>
                 
-                <p:panelGrid id="panel_ident" columns="2">
+                              <p:column headerText="Descripcion">
+                                <h:outputText value="#{paciente.tipo_id}"/>
+                               </p:column>
                     
-                    <h:outputLabel id= "hour_date" for="hour_date" value= "Hora y fecha de la consulta" title="Hola mundo" />
-                    <p:inputText value="#{RegistroConsultaBean.sp.horayfechatmp}"></p:inputText>
-                    
-                    <h:outputLabel id= "descripcion" for="descripcion" value= "Descripcion consulta"/>
-                    <p:inputText value="#{RegistroConsultaBean.sp.descripcionconsulta}"></p:inputText>
-                    
-                    <f:facet name="footer">
-                        <p:commandButton value="Agregar Consulta" action ="#{RegistroConsultaBean.sp.agregarConsultaAPaciente(RegistroConsultaBean.selectedPaciente.nombre,RegistroConsultaBean.selectedPaciente.id,RegistroConsultaBean.sp.tmpcons)}"  update="pnl_seeaddconsulta"/>
-                    </f:facet>
+                    </p:dataTable>
                 </p:panelGrid>
                 
-                <p:dataTable var="consulta" value="#{RegistroConsultaBean.selectedPaciente.consultas}">
-                        <p:column headerText="Hora y fecha">
-                            <h:outputText value="#{consulta.fechayHora}"/>
-                        </p:column>
-                    
-                        <p:column headerText="descripcion">
-                            <h:outputText value="#{consulta.resumen}"/>
-                        </p:column>
-                </p:dataTable>
-                    
                 
                 
-                       
             </p:panel>
         </p:growl>
-        
     </h:body>
 
 </html>
