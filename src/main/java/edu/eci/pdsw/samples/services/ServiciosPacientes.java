@@ -33,15 +33,37 @@ public abstract class ServiciosPacientes {
     Paciente tmp  ;
     int id; String tipo_id; String nombre; Date fechanacimiento;
     String consultacad;
-    private Consulta Pacientetmpdeconsulta;
+    
+    
+    Consulta tmpcons;
+    Date horayfechatmp;
+    String descripcionconsulta;
 
-    public Consulta getPacientetmpdeconsulta() {
-        return Pacientetmpdeconsulta;
+    public Consulta getTmpcons() {
+        return tmpcons;
     }
 
-    public void setPacientetmpdeconsulta(Consulta Pacientetmpdeconsulta) {
-        this.Pacientetmpdeconsulta = Pacientetmpdeconsulta;
+    public void setTmpcons(Consulta tmpcons) {
+        this.tmpcons = tmpcons;
     }
+    
+    
+    public Date getHorayfechatmp() {
+        return horayfechatmp;
+    }
+
+    public void setHorayfechatmp(Date horayfecha) {
+        this.horayfechatmp = horayfecha;
+    }
+
+    public String getDescripcionconsulta() {
+        return descripcionconsulta;
+    }
+
+    public void setDescripcionconsulta(String descripcionconsulta) {
+        this.descripcionconsulta = descripcionconsulta;
+    }
+    
     
     
 

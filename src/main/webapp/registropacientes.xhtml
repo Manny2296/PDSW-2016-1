@@ -12,7 +12,8 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -25,7 +26,9 @@ and open the template in the editor.
         </script>
             <p:growl id="messages" showDetail="true">
                 <p:panel id="pnl_addpaciente" header="Agregar Paciente" style="width: 600px;"> 
-                    <p:panelGrid columns="2" >
+                    
+                    <p:panelGrid columns="2">
+                        
                         <h:outputLabel id= "id_pa" for="id_pa" value= "Identificacion Paciente"/>
                         <p:inputText value="#{RegistroConsultaBean.sp.id}"></p:inputText>
                         <h:outputLabel id="tipo_id" for="tipo_id" value= "Tipo de Identificacion"/>
@@ -34,43 +37,47 @@ and open the template in the editor.
                         <p:inputText value="#{RegistroConsultaBean.sp.nombre}"></p:inputText>
                         <h:outputLabel id="dateconsultas" for="dateconsultas" value= "Fecha Nacimiento"/>
                         <p:inputText value="#{RegistroConsultaBean.sp.consultacad}"></p:inputText>
-                         <f:facet name="footer">
+                        
+                        <f:facet name="footer">
                              <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
-                             
-                    </f:facet>
-                </p:panelGrid>
+                        </f:facet>
+                        
+                    </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}"  >
-                   <f:facet name="header">
-                    
-                </f:facet>
-                
-                <p:column>
-                    <p:rowToggler/>   
-                </p:column>
-                        <p:rowExpansion>
-                            <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
-                        </p:rowExpansion>       
-                
-                <p:column headerText="Id">
-                    <h:outputText value="#{paciente.id}"/>
-                </p:column>
-                
-                <p:column headerText="Tipo">
-                    <h:outputText value="#{paciente.tipo_id}"/>
-                </p:column>
-                
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{paciente.nombre}"/>
-                </p:column>
-                         <p:column headerText="Fecha Nacimiento">
-                             <h:outputText value="#{paciente.fechaNacimiento}"/>
-                </p:column>
+                    <p:dataTable id="dtb_consultas" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}" selection="#{RegistroConsultaBean.selectedPaciente}" >
+                       
+                        <p:column>
+                            <p:commandButton value="Select">
+                                <f:setPropertyActionListener value="#{dtb_consultas}" target="#{RegistroConsultaBean.selectedPaciente}" />
+                            </p:commandButton>
+                        </p:column>
 
-              
-                
-             
-            </p:dataTable>
+                        
+                        <p:column headerText="Id">
+                            <h:outputText value="#{paciente.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{paciente.tipo_id}"/>
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{paciente.nombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Fecha Nacimiento">
+                                     <h:outputText value="#{paciente.fechaNacimiento}"/>
+                        </p:column>
+                        
+                        
+                     <f:facet name="footer">
+                            <p:commandButton  value="Agregar Consulta" action="registroconsultas.xhtml" />
+                    </f:facet>                
+                        
+                    </p:dataTable>
+                    
+                    
+                    
                 </p:panel>
             </p:growl>
         </h:form>
