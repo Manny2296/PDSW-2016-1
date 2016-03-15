@@ -37,7 +37,7 @@ and open the template in the editor.
                          <f:facet name="footer">
                              <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
                              
-                    </f:facet>
+                         </f:facet>
                 </p:panelGrid>
                
                     <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
@@ -49,10 +49,6 @@ and open the template in the editor.
                       <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
                 
                 </p:column>
-                        
-                 
-                          
-                      
                 
                 <p:column headerText="Id">
                     <h:outputText value="#{paciente.id}"/>

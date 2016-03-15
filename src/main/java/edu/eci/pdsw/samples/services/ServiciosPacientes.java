@@ -30,28 +30,47 @@ public abstract class ServiciosPacientes {
     
     
     private static ServiciosPacientes instance=new ServiciosPacientesStub();
-    Paciente tmp,seleccion  ;
-
-    public Paciente getSeleccion() {
-        return seleccion;
-    }
-
-    public void setSeleccion(Paciente seleccion) {
-        this.seleccion = seleccion;
-    }
+    
+    Paciente tmp;
     int id; String tipo_id; String nombre; Date fecha_actual;
     String consultacad;
-    private Consulta Pacientetmpdeconsulta;
     
+    Paciente seleccion;
+    Consulta tempconsulta;
+    Date fechayhora;
+    String descripcion;
 
-    public Consulta getPacientetmpdeconsulta() {
-        return Pacientetmpdeconsulta;
+    public Date getFecha_actual() {
+        return fecha_actual;
     }
 
-    public void setPacientetmpdeconsulta(Consulta Pacientetmpdeconsulta) {
-        this.Pacientetmpdeconsulta = Pacientetmpdeconsulta;
+    public void setFecha_actual(Date fecha_actual) {
+        this.fecha_actual = fecha_actual;
     }
-    
+
+    public Consulta getTempconsulta() {
+        return tempconsulta;
+    }
+
+    public void setTempconsulta(Consulta tempconsulta) {
+        this.tempconsulta = tempconsulta;
+    }
+
+    public Date getFechayhora() {
+        return fechayhora;
+    }
+
+    public void setFechayhora(Date fechayhora) {
+        this.fechayhora = fechayhora;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     
 
     public String getConsultacad() {
@@ -99,18 +118,22 @@ public abstract class ServiciosPacientes {
         return fecha_actual;
     }
     
-    
-
     public void setConsultas(Date consultas) {
         this.fecha_actual = consultas;
     }
     
+    
+    public Paciente getSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(Paciente seleccion) {
+        this.seleccion = seleccion;
+    }
     protected ServiciosPacientes(){        
 
     }
-    public Consulta crearConsulta(Date fechayHora, String resumen){
-    return new Consulta(fechayHora, resumen);
-}
+    
     
     
     public static ServiciosPacientes getInstance() throws RuntimeException{        

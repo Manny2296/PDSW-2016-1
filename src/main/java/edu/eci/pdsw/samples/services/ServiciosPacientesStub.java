@@ -36,45 +36,36 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     public final Map<Tupla<Integer,String>,Paciente> pacientes;
      
-
+   @Override
+   public String getDescripcion(){
+       return descripcion;
+   }
+    
+    @Override
+   public void setDescripcion(String descripcion){
+       this.descripcion=descripcion;
+   }
+   
     @Override
     public int getId() {
         return id;
     }
 
- 
-
-    @Override
+     @Override
     public void setId(int id) {
         this.id = id;
     }
-    @Override
-    public List<Paciente> listPaciente(){
-        List<Paciente> list = new ArrayList<>(pacientes.values());
-        try {
-            registrarNuevoPaciente(new Paciente(123, "CC", "Juan Perez", java.sql.Date.valueOf("2000-01-01")));
-            registrarNuevoPaciente(new Paciente(321, "CC", "Maria Rodriguez", java.sql.Date.valueOf("2000-01-01")));
-            registrarNuevoPaciente(new Paciente(875, "CC", "Pedro Martinez", java.sql.Date.valueOf("1956-05-01")));
-            
-            
-        } catch (ExcepcionServiciosPacientes ex) {
-            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-   
-
-    @Override
+    
+     @Override
     public String getTipo_id() {
         return tipo_id;
-    }
+    } 
 
     @Override
     public void setTipo_id(String tipo_id) {
         this.tipo_id = tipo_id;
     }
     
-
     @Override
     public String getNombre() {
         return nombre;
@@ -88,24 +79,22 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
     public ServiciosPacientesStub() {
         this.pacientes = new LinkedHashMap<>();
-      
         cargarDatosEstaticos(pacientes);
     }
-     
-    
-    
+
     @Override
-    public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
-        Paciente p=pacientes.get(new Tupla<>(idPaciente,tipoid));
-        if (p==null){
-            throw new ExcepcionServiciosPacientes("Paciente "+idPaciente+" no esta registrado");
-        }
-        else{
-            return p;
-        }
-        
+    public void setTempconsulta(Consulta tempconsulta) {
+       this.tempconsulta=tempconsulta; 
     }
 
+    @Override
+    public Consulta getTempconsulta() {
+        tempconsulta=new Consulta(this.getFechayhora(),this.getDescripcion());
+        return tempconsulta; 
+    }
+    
+    
+    
     @Override
     public Paciente getTmp() {
         fecha_actual = Date.valueOf(consultacad);
@@ -121,6 +110,22 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     public void setTmp(Paciente tmp) {
         this.tmp = tmp;
     }
+    
+    
+    
+    @Override
+    public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
+        Paciente p=pacientes.get(new Tupla<>(idPaciente,tipoid));
+        if (p==null){
+            throw new ExcepcionServiciosPacientes("Paciente "+idPaciente+" no esta registrado");
+        }
+        else{
+            return p;
+        }
+        
+    }
+
+
 
     /**
      * Clases de Equivalencia
@@ -171,6 +176,19 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         
     }
    
+    
+        @Override
+    public List<Paciente> listPaciente(){
+        List<Paciente> list = new ArrayList<>(pacientes.values());
+        try {
+            registrarNuevoPaciente(new Paciente(123, "CC", "Juan Perez", java.sql.Date.valueOf("2000-01-01")));
+            registrarNuevoPaciente(new Paciente(321, "CC", "Maria Rodriguez", java.sql.Date.valueOf("2000-01-01")));
+            registrarNuevoPaciente(new Paciente(875, "CC", "Pedro Martinez", java.sql.Date.valueOf("1956-05-01")));
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
 }
 
