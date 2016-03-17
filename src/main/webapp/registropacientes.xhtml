@@ -49,7 +49,9 @@ and open the template in the editor.
                     <p:rowToggler/>   
                 </p:column>
                         <p:rowExpansion>
-                            <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
+                            <p:commandButton value="Agregar Consulta" action="registroconsultas" >
+                                <f:setPropertyActionListener value="#{dtb_pacientes}" target="#{RegistroConsultaBean.sp.pacientetmpdeconsulta}"/>
+                            </p:commandButton>
                         </p:rowExpansion>       
                 
                 <p:column headerText="Id">

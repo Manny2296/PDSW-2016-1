@@ -24,6 +24,8 @@
                               <p:column headerText="Descripcion">
                                 <h:outputText value="#{paciente.tipo_id}"/>
                                </p:column>
+                        
+                         <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="_addpaciente"/>
                     
                     </p:dataTable>
                 </p:panelGrid>
