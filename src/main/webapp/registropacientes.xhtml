@@ -37,22 +37,26 @@ and open the template in the editor.
                          <f:facet name="footer">
                              <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
                              
-                    </f:facet>
+                         </f:facet>
                 </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}"  >
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
                    <f:facet name="header">
                     
                 </f:facet>
                 
                 <p:column>
-                    <p:rowToggler/>   
+                      <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
+                
                 </p:column>
+<<<<<<< HEAD
                         <p:rowExpansion>
                             <p:commandButton value="Agregar Consulta" action="registroconsultas" >
                                 <f:setPropertyActionListener value="#{dtb_pacientes}" target="#{RegistroConsultaBean.sp.pacientetmpdeconsulta}"/>
                             </p:commandButton>
                         </p:rowExpansion>       
+=======
+>>>>>>> 8ba8c4ed45622781f637e23d58ef31ba1455e8ea
                 
                 <p:column headerText="Id">
                     <h:outputText value="#{paciente.id}"/>

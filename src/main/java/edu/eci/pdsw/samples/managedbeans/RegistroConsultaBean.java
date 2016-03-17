@@ -20,6 +20,7 @@ import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.Serializable;
+import java.sql.Date;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -41,7 +42,6 @@ public class RegistroConsultaBean implements Serializable{
     private Paciente Paciente;
     
 
-    
     public ServiciosPacientes getSp() {
         return sp;
     }
