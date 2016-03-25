@@ -13,9 +13,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 
 /**
@@ -27,7 +31,7 @@ import javax.persistence.PersistenceException;
 
     Connection con;
     boolean validador;
-
+     List<Paciente> list_resp = new ArrayList<>();
     public JDBCDaoPaciente(Connection con) {
         this.con = con;
         
@@ -77,6 +81,9 @@ import javax.persistence.PersistenceException;
     @Override
       
     public void save(Paciente p) throws PersistenceException {
+         if(p!=null){
+             list_resp.add(p);
+         }
         PreparedStatement ps,ps2;
         String query_addpaciente = "INSERT INTO PACIENTES(id,tipo_id,nombre,fecha_nacimiento) values(?,?,?,?)";
         String query_addconsulta = "INSERT INTO CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id)values(?,?,?,?)";
@@ -127,5 +134,28 @@ import javax.persistence.PersistenceException;
     @Override
     public boolean isValidador() {
       return validador;
+    }
+
+    @Override
+    public List<Paciente> pacientes() {
+      
+        try {
+         
+            PreparedStatement ps1;
+            String query_selectall ="SELECT * FROM PACIENTES";
+            con.setAutoCommit(false);
+            ps1 = con.prepareStatement(query_selectall);
+            ResultSet executeQuery = ps1.executeQuery();
+            while(executeQuery.next()){
+                Paciente tmp = new Paciente(executeQuery.getInt(1), executeQuery.getString(2), executeQuery.getString(3), executeQuery.getDate(4));
+             list_resp.add(tmp);
+                
+                
+            }
+            return list_resp;
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCDaoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_resp;
     }
     }

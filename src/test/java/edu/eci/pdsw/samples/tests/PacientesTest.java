@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import javax.validation.constraints.AssertFalse;
@@ -63,21 +64,32 @@ public class PacientesTest {
         DaoFactory daof=DaoFactory.getInstance(properties);
         
         daof.beginSession();
-         Paciente tmp = new Paciente(58,"cc", "Isaias", new java.sql.Date(0));
-         
+         Paciente tmp = new Paciente(59,"cc", "Isaias", new java.sql.Date(0));
+          Paciente tmp2 = new Paciente(60,"cc", "Manuel", new java.sql.Date(0));
+           Paciente tmp3 = new Paciente(61,"cc", "Daniel", new java.sql.Date(0));
         
          System.out.println("Paciente agregado exitosamente");
           Set<Consulta> list_cons= new LinkedHashSet<>();
          Consulta cons1 = new Consulta(new java.sql.Date(0),"Mantenimiento Preventivo");
          list_cons.add(cons1);
          tmp.setConsultas(list_cons);
+         tmp2.setConsultas(list_cons);
+         tmp3.setConsultas(list_cons);
           daof.getDaoPaciente().save(tmp);
-        Paciente load = daof.getDaoPaciente().load(58,"cc");
+           daof.getDaoPaciente().save(tmp2);
+            daof.getDaoPaciente().save(tmp3);
+        Paciente load = daof.getDaoPaciente().load(59,"cc");
            assertEquals("Isaias",load.getNombre());
            System.out.println("Paciente cargado : " + load.getNombre());
 
-        
-     
+        //PRUEBA CONSULTA DE SELECCION LISTA DE PACIENTES
+           
+        List<Paciente> pacientes = daof.getDaoPaciente().pacientes();
+        for (int i = 0; i < pacientes.size(); i++) {
+     Paciente get = pacientes.get(i);
+            System.out.println("Paciente"+ (i+1)+" :"+ get.getNombre());
+            
+        }
         //assert que verifica la carga de un usuario por medio del nombre obtenido.
         //En este caso se verifica el usuario 33 .
    

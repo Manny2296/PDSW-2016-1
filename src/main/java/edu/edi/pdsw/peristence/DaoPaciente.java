@@ -6,6 +6,7 @@
 package edu.edi.pdsw.peristence;
 
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.util.List;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,5 +22,5 @@ public interface DaoPaciente {
     public void update(Paciente p) throws PersistenceException;
        public boolean isValidador() ;
    
-    
+    public List<Paciente> pacientes();
 }

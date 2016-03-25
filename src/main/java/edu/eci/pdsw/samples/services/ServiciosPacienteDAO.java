@@ -23,34 +23,59 @@ import javax.servlet.annotation.WebServlet;
 
 public class ServiciosPacienteDAO extends ServiciosPacientes{
   DaoFactory daof;
-    public ServiciosPacienteDAO() {
-      try {
-          InputStream input = null;
-          input = ClassLoader.getSystemResourceAsStream("applicationconfig.properties");
-          Properties properties=new Properties();
-          properties.load(input);
-          
-          daof =DaoFactory.getInstance(properties);     
-      } catch (IOException ex) {
-          Logger.getLogger(ServiciosPacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
+  
         
     @Override
     public List<Paciente> listPaciente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Paciente> pacientes = null ;
+      try {
+          InputStream input = null;
+          input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+          Properties properties=new Properties();
+          properties.load(input);
+          
+          daof =DaoFactory.getInstance(properties);
+          daof.beginSession();
+         pacientes = daof.getDaoPaciente().pacientes();return pacientes;
+      } catch (IOException ex) {
+          Logger.getLogger(ServiciosPacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return pacientes;
+      
     }
 
     @Override
     public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
-           daof.beginSession();
-      Paciente load = daof.getDaoPaciente().load(idPaciente, tipoid);return load;
+         Paciente load= null;
+        try {
+          InputStream input = null;
+          input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+          Properties properties=new Properties();
+          properties.load(input);
+          
+          daof =DaoFactory.getInstance(properties);
+          daof.beginSession();
+       load = daof.getDaoPaciente().load(idPaciente, tipoid);return load;
+      } catch (IOException ex) {
+          Logger.getLogger(ServiciosPacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        return load;
     }
 
     @Override
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
-       daof.beginSession();
-       daof.getDaoPaciente().save(p);
+      try {
+          daof.beginSession();
+          InputStream input = null;
+          input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+          Properties properties=new Properties();
+          properties.load(input);
+          
+          daof =DaoFactory.getInstance(properties);
+          daof.getDaoPaciente().save(p);
+      } catch (IOException ex) {
+          Logger.getLogger(ServiciosPacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
 
     @Override
