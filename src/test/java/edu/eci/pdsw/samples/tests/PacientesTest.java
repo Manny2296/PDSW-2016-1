@@ -55,9 +55,27 @@ public class PacientesTest {
      */
     @Test
     public void registroPacienteTest() throws ExcepcionServiciosPacientes, IOException{
+ InputStream input = null;
+        input = ClassLoader.getSystemResourceAsStream("applicationconfig_test.properties");
+        Properties properties=new Properties();
+        properties.load(input);
+        
+        DaoFactory daof=DaoFactory.getInstance(properties);
+        
+        daof.beginSession();
+         Paciente tmp = new Paciente(58,"cc", "Isaias", new java.sql.Date(0));
+         
+        
+         System.out.println("Paciente agregado exitosamente");
+          Set<Consulta> list_cons= new LinkedHashSet<>();
+         Consulta cons1 = new Consulta(new java.sql.Date(0),"Mantenimiento Preventivo");
+         list_cons.add(cons1);
+         tmp.setConsultas(list_cons);
+          daof.getDaoPaciente().save(tmp);
+        Paciente load = daof.getDaoPaciente().load(58,"cc");
+           assertEquals("Isaias",load.getNombre());
+           System.out.println("Paciente cargado : " + load.getNombre());
 
-          
-   
         
      
         //assert que verifica la carga de un usuario por medio del nombre obtenido.
