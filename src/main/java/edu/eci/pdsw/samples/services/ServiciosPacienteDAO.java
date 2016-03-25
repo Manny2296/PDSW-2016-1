@@ -12,20 +12,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author 2093130
  */
+
 public class ServiciosPacienteDAO extends ServiciosPacientes{
   DaoFactory daof;
-    public ServiciosPacienteDAO() throws IOException {
+    public ServiciosPacienteDAO() {
+      try {
           InputStream input = null;
-        input = ClassLoader.getSystemResourceAsStream("applicationconfig.properties");
-        Properties properties=new Properties();
-        properties.load(input);
-        
-     daof =DaoFactory.getInstance(properties);     
+          input = ClassLoader.getSystemResourceAsStream("applicationconfig.properties");
+          Properties properties=new Properties();
+          properties.load(input);
+          
+          daof =DaoFactory.getInstance(properties);     
+      } catch (IOException ex) {
+          Logger.getLogger(ServiciosPacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
         
     @Override
@@ -35,7 +43,8 @@ public class ServiciosPacienteDAO extends ServiciosPacientes{
 
     @Override
     public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           daof.beginSession();
+      Paciente load = daof.getDaoPaciente().load(idPaciente, tipoid);return load;
     }
 
     @Override

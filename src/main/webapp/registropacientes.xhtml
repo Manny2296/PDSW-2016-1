@@ -19,7 +19,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
-        <h:form id = "frm_paciente">
+        <h:form id = "frm_paciente" >
   <script type="text/javascript">
 
         </script>
@@ -49,14 +49,13 @@ and open the template in the editor.
                       <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
                 
                 </p:column>
-<<<<<<< HEAD
+
                         <p:rowExpansion>
                             <p:commandButton value="Agregar Consulta" action="registroconsultas" >
                                 <f:setPropertyActionListener value="#{dtb_pacientes}" target="#{RegistroConsultaBean.sp.pacientetmpdeconsulta}"/>
                             </p:commandButton>
                         </p:rowExpansion>       
-=======
->>>>>>> 8ba8c4ed45622781f637e23d58ef31ba1455e8ea
+
                 
                 <p:column headerText="Id">
                     <h:outputText value="#{paciente.id}"/>

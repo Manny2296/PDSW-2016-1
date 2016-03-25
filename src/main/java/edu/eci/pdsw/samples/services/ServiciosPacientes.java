@@ -29,7 +29,7 @@ import java.util.List;
 public abstract class ServiciosPacientes {
     
     
-    private static ServiciosPacientes instance=new ServiciosPacientesStub();
+    private static ServiciosPacientes instance=new ServiciosPacienteDAO();
     
     Paciente tmp;
     int id; String tipo_id; String nombre; Date fecha_actual;

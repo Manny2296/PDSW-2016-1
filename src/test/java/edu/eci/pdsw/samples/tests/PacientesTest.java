@@ -16,10 +16,17 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
+import edu.edi.pdsw.peristence.DaoFactory;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Properties;
+import java.util.Set;
 import javax.validation.constraints.AssertFalse;
 import javax.xml.crypto.Data;
 import org.junit.Before;
@@ -44,20 +51,19 @@ public class PacientesTest {
      * pos:el paciente queda registrado en serviciosPacientesStub
      * objetivo:Registrar a un paciente.
      * @throws ExcepcionServiciosPacientes
+     * @throws java.io.IOException
      */
     @Test
-    public void registroPacienteTest() throws ExcepcionServiciosPacientes{
-        boolean Band = false;
-        try{
-        Paciente paciente=new Paciente(123, "CC", "Sergio Aponte", java.sql.Date.valueOf("2016-03-03"));      
-        ServiciosPacientesStub isp =new ServiciosPacientesStub();
-        isp.registrarNuevoPaciente(paciente);
-        Band=true;
-        }
-        catch(ExcepcionServiciosPacientes e){
-            e.getStackTrace();
-        }     
-        assertTrue(Band);
+    public void registroPacienteTest() throws ExcepcionServiciosPacientes, IOException{
+
+          
+   
+        
+     
+        //assert que verifica la carga de un usuario por medio del nombre obtenido.
+        //En este caso se verifica el usuario 33 .
+   
+
               
     }
     
