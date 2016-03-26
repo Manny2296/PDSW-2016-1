@@ -21,10 +21,12 @@ import edu.eci.pdsw.samples.entities.Paciente;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,20 +34,11 @@ import java.util.logging.Logger;
  *
  * @author hcadavid
  */
+
 public class ServiciosPacientesStub extends ServiciosPacientes{
 
     public final Map<Tupla<Integer,String>,Paciente> pacientes;
-     
-   @Override
-   public String getDescripcion(){
-       return descripcion;
-   }
-    
-    @Override
-   public void setDescripcion(String descripcion){
-       this.descripcion=descripcion;
-   }
-   
+    //id.
     @Override
     public int getId() {
         return id;
@@ -55,17 +48,17 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     public void setId(int id) {
         this.id = id;
     }
-    
+    //tipo_id.
      @Override
     public String getTipo_id() {
         return tipo_id;
     } 
-
+    
     @Override
     public void setTipo_id(String tipo_id) {
         this.tipo_id = tipo_id;
     }
-    
+    //nombre.
     @Override
     public String getNombre() {
         return nombre;
@@ -80,21 +73,8 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     public ServiciosPacientesStub() {
         this.pacientes = new LinkedHashMap<>();
         cargarDatosEstaticos(pacientes);
-    }
-
-    @Override
-    public void setTempconsulta(Consulta tempconsulta) {
-       this.tempconsulta=tempconsulta; 
-    }
-
-    @Override
-    public Consulta getTempconsulta() {
-        tempconsulta=new Consulta(this.getFechayhora(),this.getDescripcion());
-        return tempconsulta; 
-    }
-    
-    
-    
+    }   
+    //tmp.
     @Override
     public Paciente getTmp() {
         fecha_actual = Date.valueOf(consultacad);
@@ -109,6 +89,21 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     @Override
     public void setTmp(Paciente tmp) {
         this.tmp = tmp;
+    }
+    //cons_temp
+
+    @Override
+    public void setCons_temp(Consulta cons_temp) {
+        super.setCons_temp(cons_temp);
+    }
+
+    @Override
+    public Consulta getCons_temp() {
+        fecha_total=Date.valueOf(fechayhora);
+        cons_temp=new Consulta(fecha_total,Descripcion);
+        setFechayhora("");
+        setDescripcion("");
+        return cons_temp;
     }
     
     
@@ -180,15 +175,63 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         @Override
     public List<Paciente> listPaciente(){
         List<Paciente> list = new ArrayList<>(pacientes.values());
+        /*
         try {
             registrarNuevoPaciente(new Paciente(123, "CC", "Juan Perez", java.sql.Date.valueOf("2000-01-01")));
             registrarNuevoPaciente(new Paciente(321, "CC", "Maria Rodriguez", java.sql.Date.valueOf("2000-01-01")));
             registrarNuevoPaciente(new Paciente(875, "CC", "Pedro Martinez", java.sql.Date.valueOf("1956-05-01")));
+            
         } catch (ExcepcionServiciosPacientes ex) {
             Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;
+        */        
+       return list;
     }
+
+   
+    
+     @Override
+    public void agregarConsulta() {
+        fecha_total = Date.valueOf(fechayhora);
+        Consulta c = new Consulta(fecha_total, Descripcion);
+        try {
+            agregarConsultaAPaciente(getSeleccion().getId(), getSeleccion().getTipo_id(),cons_temp);
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public List<Consulta> getConsultaLista() {
+        List<Consulta> consultas = new ArrayList<>();
+        
+        List<Paciente> lista = new ArrayList<>(pacientes.values());
+        Set<Consulta> list=null;
+        
+        for (int i = 0; i < lista.size(); i++) {
+            if(seleccion.getId()==lista.get(i).getId()){
+                list=lista.get(i).getConsultas();
+            }
+        }
+        
+        Iterator<Consulta> i=list.iterator();
+        while(i.hasNext()){
+            Consulta c = i.next();
+            consultas.add(c);
+        }
+        
+    
+            
+        
+      return consultas;
+        
+    }  
+
+    @Override
+    public List<Paciente> obtenerpacientes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
 }
 

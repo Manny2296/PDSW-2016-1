@@ -19,7 +19,7 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
-        <h:form id = "frm_paciente" >
+        <h:form id = "frm_paciente">
   <script type="text/javascript">
 
         </script>
@@ -36,26 +36,16 @@ and open the template in the editor.
                         <p:inputText value="#{RegistroConsultaBean.sp.consultacad}"></p:inputText>
                          <f:facet name="footer">
                              <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
-                             
                          </f:facet>
                 </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.obtenerpacientes()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
                    <f:facet name="header">
-                    
                 </f:facet>
                 
                 <p:column>
-                      <p:commandButton value="Agregar Consulta" action="registroconsultas.xhtml?faces-redirec=true"  />
-                
+                      <p:commandButton action="registroconsultas?faces-redirect=true" value="Registrar consulta"  />
                 </p:column>
-
-                        <p:rowExpansion>
-                            <p:commandButton value="Agregar Consulta" action="registroconsultas" >
-                                <f:setPropertyActionListener value="#{dtb_pacientes}" target="#{RegistroConsultaBean.sp.pacientetmpdeconsulta}"/>
-                            </p:commandButton>
-                        </p:rowExpansion>       
-
                 
                 <p:column headerText="Id">
                     <h:outputText value="#{paciente.id}"/>
@@ -70,12 +60,11 @@ and open the template in the editor.
                 </p:column>
                          <p:column headerText="Fecha Nacimiento">
                              <h:outputText value="#{paciente.fechaNacimiento}"/>
-                </p:column>
-
-              
-                
-             
+                </p:column>            
             </p:dataTable>
+                    
+                  
+                
                 </p:panel>
             </p:growl>
         </h:form>
