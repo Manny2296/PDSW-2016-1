@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.entities.Consulta;
+import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
 import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.IOException;
@@ -40,6 +41,7 @@ import javax.faces.context.FacesContext;
 public class RegistroConsultaBean implements Serializable{
     
     //ServiciosPacientes sp=ServiciosPacientes.getInstance();
+   
      ServiciosPacientes sp; 
     public RegistroConsultaBean() throws IOException, ExcepcionServiciosPacientes{
         

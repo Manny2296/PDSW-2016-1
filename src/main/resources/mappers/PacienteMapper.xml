@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper">
+<resultMap type='edu.eci.pdsw.samples.entities.Paciente' id='PacienteResult'>
+   <result property='nombre' column='nombre'/>
+    <result property='fechaNacimiento' column='fecha_nacimiento'/>
+   
+    
+    <collection property="consultas" ofType="edu.eci.pdsw.samples.entities.Consulta" resultMap="rmCons" columnPrefix="consulta_"> </collection>    
+</resultMap>
+
+ <resultMap type='edu.eci.pdsw.samples.entities.Consulta' id='rmCons'>
+   <id property='id' column='numero'/>
+    <id property='fechayHora' column='fecha'/>
+    <result property='resumen' column='descripcion'/>          
+   
+</resultMap>
+
+<select id="loadPacienteById" resultMap="PacienteResult">
+    SELECT pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consulta_numero, con.fecha_y_hora as consulta_fecha, con.resumen as conulta_descripcion from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=#{idpaciente} and pac.tipo_id='CC'
+</select>
+
+<insert id="insertPaciente" parameterType="map">
+    INSERT INTO PACIENTES (id,tipo_id,nombre,fecha_nacimiento) values(#{pac.id},#{pac.tipo_id},#{pac.nombre},#{pac.fechaNacimiento})
+    
+</insert>
+<insert id="insertConsulta" parameterType="map">
+    INSERT INTO CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(#{con.fechayHora},#{con.resumen},#{fk_idpac},#{fk_tipidpac})
+</insert>
+
+
+                                                                                                
+</mapper>
