@@ -27,7 +27,6 @@
                 </p:panelGrid>
                 
                 
-                
                 <p:dataTable var="consulta" value ="#{RegistroConsultaBean.sp.consultaLista}" >
                      <f:facet name="header">
                         
@@ -40,7 +39,8 @@
                               <p:column headerText="Descripcion">
                                   <h:outputText value="#{consulta.resumen}"/>
                                </p:column>
-                </p:dataTable>
+                </p:dataTable> 
+               
                 
                 <p:commandButton action="registropacientes?faces-redirect=true" value="Back"  />  
                 
