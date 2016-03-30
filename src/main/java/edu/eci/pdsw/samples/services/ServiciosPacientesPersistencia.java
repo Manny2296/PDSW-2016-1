@@ -5,7 +5,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
