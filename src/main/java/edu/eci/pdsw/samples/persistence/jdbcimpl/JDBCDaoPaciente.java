@@ -56,7 +56,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
 
     @Override
     public Paciente load(int idpaciente, String tipoid) throws PersistenceException {
-         Set<Consulta> consultas = new HashSet<Consulta>();
+         Set<Consulta> consultas = new HashSet<>();
         Paciente p = null;
         try {
             PreparedStatement loading = null;

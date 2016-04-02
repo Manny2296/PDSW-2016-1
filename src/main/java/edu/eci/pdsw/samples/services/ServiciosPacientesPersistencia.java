@@ -5,6 +5,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
+
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
@@ -14,10 +15,15 @@ import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoFactory;
 import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoPaciente;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Array;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,6 +42,28 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
         properties.load(input);
         dafo = new JDBCDaoFactory(properties);
         
+    }
+    
+    
+    @Override
+    public Paciente getTmp() {
+        fecha_actual = Date.valueOf(consultacad);
+        tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
+         setId(0);
+         setNombre("");
+         setTipo_id("");
+         setConsultacad("");
+        return tmp;
+    }
+    
+    
+    @Override
+    public Consulta getCons_temp() {
+        fecha_total=Date.valueOf(fechayhora);
+        cons_temp=new Consulta(fecha_total,Descripcion);
+        setFechayhora("");
+        setDescripcion("");
+        return cons_temp;
     }
     
     @Override
@@ -132,12 +160,55 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
 
     @Override
     public void agregarConsulta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        fecha_total = Date.valueOf(fechayhora);
+        Consulta c = new Consulta(fecha_total, Descripcion);
+        try {
+            agregarConsultaAPaciente(getSeleccion().getId(), getSeleccion().getTipo_id(),cons_temp);
+        } catch (ExcepcionServiciosPacientes ex) {
+            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public List<Consulta> getConsultaLista() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            dafo.beginSession();
+        } catch (PersistenceException ex) {
+            try {
+                throw new ExcepcionServiciosPacientes("Algo paso en la conexion", ex);
+            } catch (ExcepcionServiciosPacientes ex1) {
+                Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        Set<Consulta> consultas = new HashSet<>();
+        List<Consulta> conste=new ArrayList<>();
+        Paciente p=null;
+        try {
+            
+            p = dafo.getDaoPaciente().load(564,"CC");
+            consultas=p.getConsultas();
+            
+        Iterator<Consulta> i=consultas.iterator();
+        while(i.hasNext()){
+            Consulta c = i.next();
+            conste.add(c);
+        }
+            
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            dafo.endSession();
+        } catch (PersistenceException ex) {
+            try {
+                throw new ExcepcionServiciosPacientes("No termino conexion", ex);
+            } catch (ExcepcionServiciosPacientes ex1) {
+                Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        
+        
+        return conste;
     }
 
     public List<Paciente> cargarpacientes() {
