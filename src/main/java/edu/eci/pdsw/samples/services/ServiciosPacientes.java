@@ -32,7 +32,7 @@ public abstract class ServiciosPacientes {
     private static ServiciosPacientes instance;
     
     public static ServiciosPacientes getInstance() throws RuntimeException, IOException{
-        instance = new ServiciosPacientesPersistencia();
+        instance = new ServiciosPacientesMapper();
         return instance;
     }
     

@@ -23,6 +23,7 @@
     SELECT pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consulta_numero, con.fecha_y_hora as consulta_fecha, con.resumen as conulta_descripcion from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=#{idpaciente} and pac.tipo_id='CC'
 </select>
 
+
 <insert id="insertPaciente" parameterType="map">
     INSERT INTO PACIENTES (id,tipo_id,nombre,fecha_nacimiento) values(#{pac.id},#{pac.tipo_id},#{pac.nombre},#{pac.fechaNacimiento})
     
