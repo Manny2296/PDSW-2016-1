@@ -19,10 +19,14 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 /**
  *
@@ -35,6 +39,7 @@ public abstract class ServiciosPacientes {
         instance = new ServiciosPacientesMapper();
         return instance;
     }
+    
     
     Paciente tmp;
     int id; 

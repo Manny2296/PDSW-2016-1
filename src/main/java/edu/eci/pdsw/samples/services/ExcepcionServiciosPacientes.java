@@ -23,6 +23,7 @@ package edu.eci.pdsw.samples.services;
 public class ExcepcionServiciosPacientes extends Exception {
 
     public ExcepcionServiciosPacientes() {
+        
     }
 
     public ExcepcionServiciosPacientes(String message) {

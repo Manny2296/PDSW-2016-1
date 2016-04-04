@@ -22,10 +22,12 @@ import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
+import static edu.eci.pdsw.samples.services.ServiciosPacientesMapper.getSqlSessionFactory;
 import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import javax.validation.constraints.AssertFalse;
 import javax.xml.crypto.Data;
 import org.apache.ibatis.io.Resources;
@@ -52,6 +54,7 @@ public class PacientesTest {
                 inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
+                System.out.println("error");
                 throw new RuntimeException(e.getCause());
             }
         }
@@ -77,6 +80,19 @@ public class PacientesTest {
     @Before
     public void setUp() {
     }
+      public List<Paciente> getAllTrains()
+    {
+        List<Paciente> pacs = null;
+
+        SqlSession session = getSqlSessionFactory().openSession();
+        try {
+            PacienteMapper mapper = session.getMapper(PacienteMapper.class);
+            pacs = mapper.obtenerPacientes();
+        } finally {
+            session.close();
+        }   
+        return pacs;
+    }
     
     /**
      * pre:El paciente existe.
@@ -97,18 +113,23 @@ public class PacientesTest {
        //System.out.println(pmap.loadPacienteById(2,"cc"));
       
         //Aca se agrega un paciente coon 0 consultas.
-        Paciente tmp = new Paciente(101011, "CC", "Manuel Chiviado R,", new java.sql.Date(0));
-      Consulta c = new Consulta(new java.sql.Date(0),"Chuck Norris");
+        Paciente tmp = new Paciente(202, "CC", "manuel Probando,", new java.sql.Date(0));
+      Consulta c = new Consulta(new java.sql.Date(0),"fuu Norris");
       //La consulta c es agregada  con su foranea como el id del Paciente tmp
-     // registrarConsultaaPaciente(pmap, c,1998, "CC");
+        //Aca se agrega el paciente 
+       registrarNuevoPaciente(pmap,tmp);
+      registrarConsultaaPaciente(pmap,c,202,"CC");
 
       
-      //Aca se agrega el paciente 
-       registrarNuevoPaciente(pmap,tmp);
+    
+        List<Paciente> pacientes = pmap.obtenerPacientes();
+        for (int i = 0; i < pacientes.size(); i++) {
+            System.out.println("Paciente :"+ pacientes.get(i).getNombre() );
+        }
         
         
        //Cargamos el paciente para verificar sus consultas
-        System.out.println("Paciente cargado :" + pmap.loadPacienteById(1018484513,"CC"));
+        System.out.println("Paciente cargado :" + pmap.loadPacienteById(202,"CC"));
        sqlss.commit();
         
         

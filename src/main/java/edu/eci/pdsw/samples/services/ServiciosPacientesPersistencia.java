@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 
 public class ServiciosPacientesPersistencia extends ServiciosPacientes{
      DaoFactory dafo;
+     
     
     public ServiciosPacientesPersistencia() throws IOException{
         InputStream input = null;
