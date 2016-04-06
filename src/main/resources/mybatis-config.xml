@@ -19,7 +19,7 @@
     </environments>
         
     <mappers>
-        <package name="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers"/>
+       <mapper resource="mappers/PacienteMapper.xml"></mapper>
     </mappers> 
         
 </configuration>

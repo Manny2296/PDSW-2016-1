@@ -10,6 +10,7 @@ import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.io.Resources;
@@ -22,12 +23,26 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  * @author Felipe
  */
 public class ServiciosPacientesMapper extends ServiciosPacientes{
+      Paciente tmp2;
+      Paciente seleccion1;
+SqlSessionFactory sqlSessionFactory ;
+    
+    public ServiciosPacientesMapper() {
+        sqlSessionFactory= getSqlSessionFactory();
+   tmp2 = this.tmp;
+   seleccion1 = this.seleccion;
+       
+    }
+
+ 
+    
+    
           public static SqlSessionFactory getSqlSessionFactory() {
         SqlSessionFactory sqlSessionFactory = null;
         if (sqlSessionFactory == null) {
             InputStream inputStream;
             try {
-                inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
+                inputStream = Resources.getResourceAsStream("mybatis-config.xml");
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
                 throw new RuntimeException(e.getCause());
@@ -47,21 +62,13 @@ public class ServiciosPacientesMapper extends ServiciosPacientes{
           @Override
     public void registrarNuevoPaciente( Paciente p) throws ExcepcionServiciosPacientes {
      
-                 SqlSessionFactory sqlSessionFactory = null;
-        if (sqlSessionFactory == null) {
-            InputStream inputStream;
-            try {
-                inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            } catch (IOException e) {
-                throw new RuntimeException(e.getCause());
-            }
-        }
-        
+                
+       
 
         SqlSession sqlss = sqlSessionFactory.openSession();
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
- pmap.insertPaciente(p);//o change body of generated methods, choose Tools | Templates.
+        pmap.insertPaciente(p);
+     sqlss.commit();//o change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -74,40 +81,36 @@ public class ServiciosPacientesMapper extends ServiciosPacientes{
 
           @Override
     public List<Consulta> getConsultaLista() {
-        System.out.println("Luego");
-        return new ArrayList<>();
-    }
-
-
-    public List<Paciente> obtenerPacientes() {
-                   SqlSessionFactory sessionfact = getSqlSessionFactory();
-
-        SqlSession sqlss = sessionfact.openSession();
-        System.out.println("Ya hicimos la sesion");
+              System.out.println("Entrre");
+          Paciente seleccion2 = getSeleccion();
+    SqlSession sqlss = sqlSessionFactory.openSession();
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-       
-            List<Paciente> pacientes = pmap.obtenerPacientes();
-            System.out.println("Lista:" + pacientes.size());
-        return pacientes;
+          List<Consulta> obtenerconsultas = pmap.obtenerconsultas(seleccion2.getId(), seleccion2.getTipo_id());
+          if(obtenerconsultas.isEmpty() ){
+              obtenerconsultas.add(new Consulta(new Date(0), "Manuel"));
+          }
+        return  obtenerconsultas;
     }
+
+
 
 
 
     @Override
     public void agregarConsultaAPaciente(int idPaciente, String tipoid, Consulta c) throws ExcepcionServiciosPacientes {
-                      SqlSessionFactory sessionfact = getSqlSessionFactory();
-
-        SqlSession sqlss = sessionfact.openSession();    
-
+                      
+ System.out.println("Seleccion"+seleccion.getNombre());
+   SqlSession sqlss = sqlSessionFactory.openSession();
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
         pmap.insertConsulta(c, idPaciente, tipoid);
+             sqlss.commit();
     }
 
     @Override
     public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
-                   SqlSessionFactory sessionfact = getSqlSessionFactory();
-
-        SqlSession sqlss = sessionfact.openSession();
+              
+  SqlSession sqlss = sqlSessionFactory.openSession();
+        
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
               Paciente loadPacienteById = pmap.loadPacienteById(idPaciente, tipoid);
@@ -116,32 +119,23 @@ public class ServiciosPacientesMapper extends ServiciosPacientes{
 
     @Override
     public List<Paciente> listPaciente() {
-                            SqlSessionFactory sqlSessionFactory = null;
-        if (sqlSessionFactory == null) {
-            InputStream inputStream;
-            try {
-                inputStream = Resources.getResourceAsStream("mybatis-config-h2.xml");
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            } catch (IOException e) {
-                throw new RuntimeException(e.getCause());
-            }
-        }
-        
+             
+      SqlSession sqlss = sqlSessionFactory.openSession();
 
-        SqlSession sqlss = sqlSessionFactory.openSession();
+        
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        List<Paciente> pacientes = pmap.obtenerPacientes();
+        List<Paciente> pacientes = pmap.obtenerpacientes();
         return pacientes;
     }
 
     @Override
     public List<Paciente> obtenerpacientes() {
-                    SqlSessionFactory sessionfact = getSqlSessionFactory();
+              
 
-        SqlSession sqlss = sessionfact.openSession();
-
+         
+  SqlSession sqlss = sqlSessionFactory.openSession();
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
-        List<Paciente> pacientes = pmap.obtenerPacientes();
+        List<Paciente> pacientes = pmap.obtenerpacientes();
         return pacientes;
     }
    

@@ -87,7 +87,7 @@ public class PacientesTest {
         SqlSession session = getSqlSessionFactory().openSession();
         try {
             PacienteMapper mapper = session.getMapper(PacienteMapper.class);
-            pacs = mapper.obtenerPacientes();
+            pacs = mapper.obtenerpacientes();
         } finally {
             session.close();
         }   
@@ -113,20 +113,28 @@ public class PacientesTest {
        //System.out.println(pmap.loadPacienteById(2,"cc"));
       
         //Aca se agrega un paciente coon 0 consultas.
-        Paciente tmp = new Paciente(202, "CC", "manuel Probando,", new java.sql.Date(0));
-      Consulta c = new Consulta(new java.sql.Date(0),"fuu Norris");
+        Paciente tmp = new Paciente(205, "CC", "Daniel Probando,", new java.sql.Date(0));
+      Consulta c = new Consulta(new java.sql.Date(0),"Otra mas");
+      Consulta c2 = new Consulta(new java.sql.Date(0), "Probando");
       //La consulta c es agregada  con su foranea como el id del Paciente tmp
         //Aca se agrega el paciente 
        registrarNuevoPaciente(pmap,tmp);
-      registrarConsultaaPaciente(pmap,c,202,"CC");
+      registrarConsultaaPaciente(pmap,c,205,"CC");
+      registrarConsultaaPaciente(pmap,c2,205,"CC");
+      
 
       
     
-        List<Paciente> pacientes = pmap.obtenerPacientes();
+        List<Paciente> pacientes = pmap.obtenerpacientes();
+        
         for (int i = 0; i < pacientes.size(); i++) {
             System.out.println("Paciente :"+ pacientes.get(i).getNombre() );
         }
         
+        List<Consulta> obtenerconsultas = pmap.obtenerconsultas(204, "CC");   
+        for (int i = 0; i < obtenerconsultas.size(); i++) {
+            System.out.println("Consultas :"+ obtenerconsultas.get(i).getResumen());
+        }
         
        //Cargamos el paciente para verificar sus consultas
         System.out.println("Paciente cargado :" + pmap.loadPacienteById(202,"CC"));

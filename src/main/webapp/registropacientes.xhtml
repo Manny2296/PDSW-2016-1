@@ -35,11 +35,11 @@ and open the template in the editor.
                         <h:outputLabel id="dateconsultas" for="dateconsultas" value= "Fecha Nacimiento"/>
                         <p:inputText value="#{RegistroConsultaBean.sp.consultacad}"></p:inputText>
                          <f:facet name="footer">
-                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="pnl_addpaciente"/>
+                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="dtb_pacientes"/>
                          </f:facet>
                 </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.listPaciente()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.obtenerpacientes()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
                    <f:facet name="header">
                 </f:facet>
                 

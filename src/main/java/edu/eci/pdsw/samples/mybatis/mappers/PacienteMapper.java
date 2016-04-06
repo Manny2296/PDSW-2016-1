@@ -49,5 +49,6 @@ public interface PacienteMapper {
      */
     public void insertConsulta(@Param("con")Consulta con,@Param("fk_idpac")int id,@Param("fk_tipidpac")String tipoid);
        
-    public List<Paciente> obtenerPacientes();   
+    public List<Paciente> obtenerpacientes();   
+        public List<Consulta> obtenerconsultas(@Param("id_pac")int idpac,@Param("tipo_id")String tipo_id); 
 }

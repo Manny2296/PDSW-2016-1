@@ -59,6 +59,9 @@ public abstract class ServiciosPacientes {
     //Getters y setters del registro de un paciente.
     //tmp.
     public Paciente getTmp() {
+            fecha_actual=Date.valueOf(consultacad);
+        tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
+    
         return tmp;
     }
 
