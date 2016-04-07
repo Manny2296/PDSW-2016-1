@@ -22,7 +22,7 @@ import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosPacientes;
-import static edu.eci.pdsw.samples.services.ServiciosPacientesMapper.getSqlSessionFactory;
+
 import edu.eci.pdsw.samples.services.ServiciosPacientesStub;
 import java.io.IOException;
 import java.io.InputStream;

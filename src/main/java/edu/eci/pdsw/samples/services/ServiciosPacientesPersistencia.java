@@ -13,6 +13,7 @@ import edu.eci.pdsw.samples.persistence.DaoPaciente;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoFactory;
 import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoPaciente;
+import edu.eci.pdsw.samples.persistence.jdbcimpl.MyBatisDaoFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Array;
@@ -41,31 +42,14 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
         input = ServiciosPacientes.class.getClassLoader().getResource("applicationconfig.properties").openStream();
         Properties properties=new Properties();
         properties.load(input);
-        dafo = new JDBCDaoFactory(properties);
+        dafo = new MyBatisDaoFactory();
         
     }
     
     
-    @Override
-    public Paciente getTmp() {
-        fecha_actual = Date.valueOf(consultacad);
-        tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
-         setId(0);
-         setNombre("");
-         setTipo_id("");
-         setConsultacad("");
-        return tmp;
-    }
+  
     
-    
-    @Override
-    public Consulta getCons_temp() {
-        fecha_total=Date.valueOf(fechayhora);
-        cons_temp=new Consulta(fecha_total,Descripcion);
-        setFechayhora("");
-        setDescripcion("");
-        return cons_temp;
-    }
+
     
     @Override
     public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
@@ -159,7 +143,7 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
         return list;
     }
 
-    @Override
+   /* @Override
     public void agregarConsulta() {
         fecha_total = Date.valueOf(fechayhora);
         Consulta c = new Consulta(fecha_total, Descripcion);
@@ -169,7 +153,7 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
             Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+*/
     @Override
     public List<Consulta> getConsultaLista() {
         try {
@@ -220,5 +204,7 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
     public List<Paciente> listPaciente() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+  
   
 }

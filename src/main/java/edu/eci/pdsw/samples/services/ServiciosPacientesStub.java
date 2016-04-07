@@ -35,39 +35,11 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 
-public class ServiciosPacientesStub extends ServiciosPacientes{
+public class ServiciosPacientesStub {
 
     public final Map<Tupla<Integer,String>,Paciente> pacientes;
     //id.
-    @Override
-    public int getId() {
-        return id;
-    }
-
-     @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-    //tipo_id.
-     @Override
-    public String getTipo_id() {
-        return tipo_id;
-    } 
-    
-    @Override
-    public void setTipo_id(String tipo_id) {
-        this.tipo_id = tipo_id;
-    }
-    //nombre.
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+ 
 
 
     public ServiciosPacientesStub() {
@@ -75,24 +47,12 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         cargarDatosEstaticos(pacientes);
     }   
     //tmp.
-    @Override
-    public Paciente getTmp() {
-        fecha_actual = Date.valueOf(consultacad);
-        tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
-         setId(0);
-         setNombre("");
-         setTipo_id("");
-         setConsultacad("");
-        return tmp;
-    }
+   
 
-    @Override
-    public void setTmp(Paciente tmp) {
-        this.tmp = tmp;
-    }
+   
     //cons_temp
 
-    @Override
+   /* @Override
     public void setCons_temp(Consulta cons_temp) {
         super.setCons_temp(cons_temp);
     }
@@ -106,9 +66,9 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         return cons_temp;
     }
     
+   */ 
     
-    
-    @Override
+  
     public Paciente consultarPaciente(int idPaciente, String tipoid) throws ExcepcionServiciosPacientes {
         Paciente p=pacientes.get(new Tupla<>(idPaciente,tipoid));
         if (p==null){
@@ -129,7 +89,7 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
      */
     
     
-    @Override
+
     public void registrarNuevoPaciente(Paciente p) throws ExcepcionServiciosPacientes {
       
         pacientes.put(new Tupla<>(p.getId(),p.getTipo_id()), p);
@@ -146,7 +106,7 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     
     */
 
-    @Override
+    
     public void agregarConsultaAPaciente(int idPaciente, String tipoid, Consulta c) throws ExcepcionServiciosPacientes {
         Paciente p=pacientes.get(new Tupla<>(idPaciente,tipoid));
         if (p==null){
@@ -172,7 +132,8 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
     }
    
     
-        @Override
+    
+    
     public List<Paciente> listPaciente(){
         List<Paciente> list = new ArrayList<>(pacientes.values());
         /*
@@ -190,25 +151,17 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
 
    
     
-     @Override
-    public void agregarConsulta() {
-        fecha_total = Date.valueOf(fechayhora);
-        Consulta c = new Consulta(fecha_total, Descripcion);
-        try {
-            agregarConsultaAPaciente(getSeleccion().getId(), getSeleccion().getTipo_id(),cons_temp);
-        } catch (ExcepcionServiciosPacientes ex) {
-            Logger.getLogger(ServiciosPacientesStub.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
+   
     
-    @Override
+   
     public List<Consulta> getConsultaLista() {
         List<Consulta> consultas = new ArrayList<>();
         
         List<Paciente> lista = new ArrayList<>(pacientes.values());
         Set<Consulta> list=null;
         
-        for (int i = 0; i < lista.size(); i++) {
+     /*   for (int i = 0; i < lista.size(); i++) {
             if(seleccion.getId()==lista.get(i).getId()){
                 list=lista.get(i).getConsultas();
             }
@@ -221,13 +174,13 @@ public class ServiciosPacientesStub extends ServiciosPacientes{
         }
         
     
-            
+       */     
         
       return consultas;
         
     }  
 
-    @Override
+
     public List<Paciente> obtenerpacientes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

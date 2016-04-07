@@ -27,24 +27,24 @@ and open the template in the editor.
                 <p:panel id="pnl_addpaciente" header="Agregar Paciente" style="width: 600px;"> 
                     <p:panelGrid columns="2" >
                         <h:outputLabel id= "id_pa" for="id_pa" value= "Identificacion Paciente"/>
-                        <p:inputText value="#{RegistroConsultaBean.sp.id}"></p:inputText>
+                        <p:inputText value="#{RegistroConsultaBean.id}"></p:inputText>
                         <h:outputLabel id="tipo_id" for="tipo_id" value= "Tipo de Identificacion"/>
-                        <p:inputText value="#{RegistroConsultaBean.sp.tipo_id}"></p:inputText>
+                        <p:inputText value="#{RegistroConsultaBean.tipo_id}"></p:inputText>
                         <h:outputLabel id="nombre" for="nombre" value= "Nombre"/>
-                        <p:inputText value="#{RegistroConsultaBean.sp.nombre}"></p:inputText>
+                        <p:inputText value="#{RegistroConsultaBean.nombre}"></p:inputText>
                         <h:outputLabel id="dateconsultas" for="dateconsultas" value= "Fecha Nacimiento"/>
-                        <p:inputText value="#{RegistroConsultaBean.sp.consultacad}"></p:inputText>
+                        <p:inputText value="#{RegistroConsultaBean.consultacad}"></p:inputText>
                          <f:facet name="footer">
-                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.sp.tmp)}"  update="dtb_pacientes"/>
+                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.tmp)}"  update="dtb_pacientes"/>
                          </f:facet>
                 </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.obtenerpacientes()}" selectionMode="single" selection="#{RegistroConsultaBean.sp.seleccion}"  rowKey="#{paciente.id}">
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.obtenerpacientes()}" selectionMode="single" selection="#{RegistroConsultaBean.seleccion}"  rowKey="#{paciente.id}">
                    <f:facet name="header">
                 </f:facet>
                 
                 <p:column>
-                      <p:commandButton action="registroconsultas?faces-redirect=true" value="Registrar consulta"  />
+                      <p:commandButton action="registroconsultas?faces-redirect=true" value="Registrar consulta"/>
                 </p:column>
                 
                 <p:column headerText="Id">
