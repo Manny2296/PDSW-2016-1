@@ -42,7 +42,7 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
         input = ServiciosPacientes.class.getClassLoader().getResource("applicationconfig.properties").openStream();
         Properties properties=new Properties();
         properties.load(input);
-        dafo = new MyBatisDaoFactory();
+        dafo = new MyBatisDaoFactory(); 
         
     }
     
@@ -203,6 +203,17 @@ public class ServiciosPacientesPersistencia extends ServiciosPacientes{
     @Override
     public List<Paciente> listPaciente() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Paciente loadPaciente(int id, String tipo) {
+         try {
+             dafo.beginSession();
+             Paciente loadByid = dafo.getDaoPaciente().loadByid(id, tipo);return loadByid;
+         } catch (PersistenceException ex) {
+             Logger.getLogger(ServiciosPacientesPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+         }
+       return null;
     }
 
   

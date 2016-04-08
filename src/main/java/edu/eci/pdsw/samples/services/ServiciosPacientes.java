@@ -88,7 +88,7 @@ public abstract class ServiciosPacientes {
      * @throws Excepcionconsultaapacienteinexistente si se presenta algún error de persistencia o si el paciente no existe.
      */
     public abstract void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c) throws ExcepcionServiciosPacientes;
-
+   public abstract Paciente loadPaciente(int id,String tipo);
 
     public abstract List<Consulta> getConsultaLista();
     

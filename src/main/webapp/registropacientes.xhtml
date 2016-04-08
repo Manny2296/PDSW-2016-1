@@ -11,7 +11,6 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       >
     <h:head>
 
@@ -35,16 +34,16 @@ and open the template in the editor.
                         <h:outputLabel id="dateconsultas" for="dateconsultas" value= "Fecha Nacimiento"/>
                         <p:inputText value="#{RegistroConsultaBean.consultacad}"></p:inputText>
                          <f:facet name="footer">
-                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.sp.registrarNuevoPaciente(RegistroConsultaBean.tmp)}"  update="dtb_pacientes"/>
+                             <p:commandButton value="Agregar Paciente" action ="#{RegistroConsultaBean.registrarPac()}"  update="dtb_pacientes"/>
                          </f:facet>
                 </p:panelGrid>
                
-                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.sp.obtenerpacientes()}" selectionMode="single" selection="#{RegistroConsultaBean.seleccion}"  rowKey="#{paciente.id}">
+                    <p:dataTable id="dtb_pacientes" var="paciente" value ="#{RegistroConsultaBean.obtenerpacs()}" selectionMode="single" selection="#{RegistroConsultaBean.seleccion}"  rowKey="#{paciente.id}">
                    <f:facet name="header">
                 </f:facet>
                 
                 <p:column>
-                      <p:commandButton action="registroconsultas?faces-redirect=true" value="Registrar consulta"/>
+                    <p:commandButton  action="registroconsultas"  value="Registrar consulta"/>
                 </p:column>
                 
                 <p:column headerText="Id">

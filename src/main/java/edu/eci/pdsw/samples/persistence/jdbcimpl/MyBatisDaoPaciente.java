@@ -50,5 +50,11 @@ public class MyBatisDaoPaciente implements DaoPaciente{
      session.commit();
      return obtenerpacientes;
     }
+
+    @Override
+    public Paciente loadByid(int id, String tipoid) {
+        PacienteMapper pmap = session.getMapper(PacienteMapper.class);
+        Paciente loadPacienteById = pmap.loadPacienteById(id, tipoid); session.commit();return loadPacienteById;
+    }
     
 }

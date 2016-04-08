@@ -174,5 +174,10 @@ public class JDBCDaoPaciente implements DaoPaciente {
             Logger.getLogger(JDBCDaoPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public Paciente loadByid(int id, String tipoid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

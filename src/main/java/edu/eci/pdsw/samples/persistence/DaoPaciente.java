@@ -34,7 +34,7 @@ public interface DaoPaciente {
     public void update(Paciente p) throws PersistenceException;
     
     public List<Paciente> loadall() throws PersistenceException;
-
+    public Paciente loadByid(int id,String tipoid);
    
 
     

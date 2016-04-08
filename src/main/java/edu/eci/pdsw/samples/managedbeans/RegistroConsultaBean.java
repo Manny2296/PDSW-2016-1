@@ -23,6 +23,7 @@ import edu.eci.pdsw.samples.services.ServiciosPacientes;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -62,14 +63,33 @@ public class RegistroConsultaBean implements Serializable{
     String Descripcion;
     Consulta cons_temp;
 
-    public Paciente getTmp() {
-         fecha_actual = Date.valueOf(consultacad);
+    
+    
+    public void registrarPac() throws ExcepcionServiciosPacientes{
+       fecha_actual = Date.valueOf(consultacad);
         tmp = new Paciente(id, tipo_id, nombre, fecha_actual);
          setId(0);
          setNombre("");
          setTipo_id("");
-         setConsultacad("");
+         setConsultacad(""); 
+         sp.registrarNuevoPaciente(tmp);
+    }
+    public void agregarconsulta() throws ExcepcionServiciosPacientes{
+        System.out.println("Entramos");
+        seleccion = loadbyid(seleccion.getId(), seleccion.getTipo_id());
+        sp.agregarConsultaAPaciente(seleccion.getId(), seleccion.getTipo_id(), cons_temp);
+        
+    }
+    public List<Paciente> obtenerpacs(){
+         List<Paciente> obtenerpacientes = sp.obtenerpacientes();return obtenerpacientes;
+    }
+    public Paciente getTmp() {
+     
         return tmp;
+    }
+    public Paciente loadbyid(int id,String tipo){
+      Paciente cargado=  sp.loadPaciente(id, tipo);
+        return cargado;
     }
 
     public void setTmp(Paciente tmp) {
@@ -123,6 +143,7 @@ public class RegistroConsultaBean implements Serializable{
         }
         else{
         System.out.println("Seleccion:"+ seleccion.getNombre());
+         seleccion = loadbyid(seleccion.getId(), seleccion.getTipo_id());
         return seleccion;}
     }
 

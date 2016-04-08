@@ -125,12 +125,8 @@ public class PacientesTest {
 
       
     
-        List<Paciente> pacientes = pmap.obtenerpacientes();
-        
-        for (int i = 0; i < pacientes.size(); i++) {
-            System.out.println("Paciente :"+ pacientes.get(i).getNombre() );
-        }
-        
+        Paciente loadPacienteById = pmap.loadPacienteById(205, "CC");
+        System.out.println("que onda"+loadPacienteById.getConsultas().toString());
         List<Consulta> obtenerconsultas = pmap.obtenerconsultas(204, "CC");   
         for (int i = 0; i < obtenerconsultas.size(); i++) {
             System.out.println("Consultas :"+ obtenerconsultas.get(i).getResumen());

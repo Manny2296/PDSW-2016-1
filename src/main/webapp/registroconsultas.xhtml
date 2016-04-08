@@ -22,22 +22,22 @@
                     <p:inputText value="#{RegistroConsultaBean.descripcion}"></p:inputText>
                     
                     <f:facet name="footer">
-                        <p:commandButton value="Agregar consulta" action ="#{RegistroConsultaBean.sp.agregarConsultaAPaciente(RegistroConsultaBean.seleccion.id, RegistroConsultaBean.seleccion.tipo_id, RegistroConsultaBean.cons_temp)}"  update="pnl_addconsulta"/>
+                        <p:commandButton value="Agregar consulta" action ="#{RegistroConsultaBean.agregarconsulta()}"  update="pnl_addconsulta"/>
                     </f:facet>
                 </p:panelGrid>
                 
                 
-                <p:dataTable var="consulta" value ="" >
+                <p:dataTable var="consulta" value ="#{RegistroConsultaBean.seleccion.consultas}" >
                      <f:facet name="header">
                         
                      </f:facet>
                     
                               <p:column headerText="Fecha y hora">
-                                  <h:outputText value=""/>
+                                  <h:outputText value="#{consulta.fechayHora}"/>
                              </p:column>
                 
                               <p:column headerText="Descripcion">
-                                  <h:outputText value=""/>
+                                  <h:outputText value="#{consulta.resumen}"/>
                                </p:column>
                 </p:dataTable> 
                
