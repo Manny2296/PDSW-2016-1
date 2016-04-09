@@ -43,25 +43,25 @@ public class RegistroConsultaBean implements Serializable{
     
     //ServiciosPacientes sp=ServiciosPacientes.getInstance();
    
-     ServiciosPacientes sp; 
+    private static ServiciosPacientes sp; 
     public RegistroConsultaBean() throws IOException, ExcepcionServiciosPacientes{
         
         sp=ServiciosPacientes.getInstance();
         
     }
-    Paciente tmp;
-    int id; 
-    String tipo_id;
-    String nombre; 
-    Date fecha_actual;
-    String consultacad;
+    private Paciente tmp;
+    private int id; 
+    private String tipo_id;
+    private String nombre; 
+    private Date fecha_actual;
+    private String consultacad;
     
-    Paciente seleccion;
+    private static Paciente seleccion;
     
-    String fechayhora;
-    Date fecha_total;
-    String Descripcion;
-    Consulta cons_temp;
+    private String fechayhora;
+    private Date fecha_total;
+    private String Descripcion;
+    private Consulta cons_temp;
 
     
     

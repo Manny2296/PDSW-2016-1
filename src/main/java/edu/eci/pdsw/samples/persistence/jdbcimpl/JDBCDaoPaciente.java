@@ -56,7 +56,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
 
     @Override
     public Paciente load(int idpaciente, String tipoid) throws PersistenceException {
-         Set<Consulta> consultas = new HashSet<>();
+        Set<Consulta> consultas = new HashSet<>();
         Paciente p = null;
         try {
             PreparedStatement loading = null;
@@ -133,7 +133,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
         try{
             Set<Consulta> consultas = p.getConsultas();
             for (Consulta consul : consultas){
-                if(consul.getId() == -1){
+                if(consul.getId()<0){
                     PreparedStatement guarde = null;
                     String insertConsulta = "INSERT INTO CONSULTAS (fecha_y_hora,resumen,PACIENTES_id, PACIENTES_tipo_id) VALUES (?,?,?,?)";
                     con.setAutoCommit(false);
@@ -160,7 +160,7 @@ public class JDBCDaoPaciente implements DaoPaciente {
             con.setAutoCommit(false);
             updates = con.prepareStatement(actualice);
             for (Consulta c : p.getConsultas()){
-                if (c.getId()==-1){
+                if (c.getId()<0){
                     updates.setDate(1, c.getFechayHora());
                     updates.setString(2, c.getResumen());
                     updates.setInt(3, p.getId());
@@ -177,7 +177,43 @@ public class JDBCDaoPaciente implements DaoPaciente {
 
     @Override
     public Paciente loadByid(int id, String tipoid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Consulta> consultas = new HashSet<>();
+        Paciente p = null;
+        try {
+            PreparedStatement loading = null;
+            String cargarPaciente = "select pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS consultaid, con.fecha_y_hora, con.resumen from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=? and pac.tipo_id=?";
+            con.setAutoCommit(false);
+            loading = con.prepareStatement(cargarPaciente);
+            loading.setInt(1, id);
+            loading.setString(2, tipoid);
+            ResultSet resp = loading.executeQuery();
+            con.commit();
+            if(resp.next()){
+                
+                p = new Paciente(id, tipoid,resp.getString("nombre"),resp.getDate("fecha_nacimiento"));
+                
+                if (resp.getString("consultaid")!=null){
+                    
+                    Consulta c = new Consulta(resp.getDate("fecha_y_hora"), resp.getString("resumen"));
+                    consultas.add(c);
+                    c.setId(1);
+                }
+            }
+            while(resp.next()){
+                p = new Paciente(id, tipoid,resp.getString("nombre"),resp.getDate("fecha_nacimiento"));
+                Consulta c = new Consulta(resp.getDate("fecha_y_hora"), resp.getString("resumen"));
+                consultas.add(c);
+                c.setId(1);
+            }
+            p.setConsultas(consultas);
+        } catch (SQLException ex) {
+            try {
+                throw new PersistenceException("An error ocurred while loading "+id,ex);
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(JDBCDaoPaciente.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return p;
     }
     
 }
