@@ -26,9 +26,6 @@ import java.sql.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-
-import javax.faces.context.FacesContext;
 
 
 /**
@@ -56,7 +53,7 @@ public class RegistroConsultaBean implements Serializable{
     private Date fecha_actual;
     private String consultacad;
     
-    private static Paciente seleccion;
+    private Paciente seleccion;
     
     private String fechayhora;
     private Date fecha_total;
